@@ -1,5 +1,6 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import type { VerificationLevel } from "@prisma/client";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
@@ -8,7 +9,7 @@ const verificationLabels = {
   TIER_1_DIGITAL: "Digitally Verified",
   TIER_2_STAKE: "Staked Member",
   TIER_3_KYC: "KYC Verified",
-} as const;
+} as const satisfies Record<VerificationLevel, string>;
 
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
