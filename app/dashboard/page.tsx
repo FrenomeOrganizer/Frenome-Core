@@ -12,6 +12,14 @@ const verificationLevels = [
 
 type VerificationLevel = (typeof verificationLevels)[number];
 
+type DashboardUser = {
+  fullName: string;
+  email: string;
+  votingWeight: number;
+  verificationLevel: VerificationLevel;
+  tier: string;
+};
+
 const verificationLabels = {
   NONE: "Unverified",
   TIER_1_DIGITAL: "Digitally Verified",
@@ -26,7 +34,7 @@ export default async function DashboardPage() {
     redirect("/login");
   }
 
-  const user = await prisma.user.findUnique({
+  const user: DashboardUser | null = await prisma.user.findUnique({
     where: {
       email: session.user.email.toLowerCase(),
     },
