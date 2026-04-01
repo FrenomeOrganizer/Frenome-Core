@@ -1,8 +1,16 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import type { VerificationLevel } from "@prisma/client";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+
+const verificationLevels = [
+  "NONE",
+  "TIER_1_DIGITAL",
+  "TIER_2_STAKE",
+  "TIER_3_KYC",
+] as const;
+
+type VerificationLevel = (typeof verificationLevels)[number];
 
 const verificationLabels = {
   NONE: "Unverified",
