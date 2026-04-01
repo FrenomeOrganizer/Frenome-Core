@@ -1,6 +1,13 @@
-import { MembershipTier } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+
+const membershipTiers = [
+  "INDIVIDUAL",
+  "INSTITUTIONAL",
+  "CORPORATE",
+] as const;
+
+type MembershipTier = (typeof membershipTiers)[number];
 
 type RegisterRequestBody = {
   fullName?: string;
@@ -8,7 +15,7 @@ type RegisterRequestBody = {
   githubHandle?: string;
   affiliation?: string;
   website?: string;
-  tier?: keyof typeof MembershipTier;
+  tier?: MembershipTier;
   oflaAgreed?: boolean;
 };
 
@@ -43,7 +50,7 @@ export async function POST(request: Request) {
       );
     }
 
-    if (!(tier in MembershipTier)) {
+    if (!membershipTiers.includes(tier as MembershipTier)) {
       return NextResponse.json(
         { error: "Invalid membership tier." },
         { status: 400 },
@@ -56,7 +63,7 @@ export async function POST(request: Request) {
         email,
         githubHandle: normalizedGithubHandle,
         affiliation: affiliation || null,
-        tier: MembershipTier[tier],
+        tier: tier as MembershipTier,
         oflaAgreed,
         oflaAgreedAt: oflaAgreed ? new Date() : null,
       },
