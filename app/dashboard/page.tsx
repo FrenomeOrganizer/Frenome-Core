@@ -43,6 +43,12 @@ export default async function DashboardPage() {
     redirect("/login");
   }
 
+  const verificationLevel = verificationLevels.includes(
+    user.verificationLevel as VerificationLevel,
+  )
+    ? (user.verificationLevel as VerificationLevel)
+    : "NONE";
+
   return (
     <main className="min-h-screen bg-slate-950 px-6 py-10 text-slate-100 sm:px-8 lg:px-12">
       <div className="mx-auto max-w-5xl">
@@ -78,8 +84,8 @@ export default async function DashboardPage() {
               Verification
             </p>
             <p className="mt-4 text-2xl font-semibold text-white">
-              Status: {verificationLabels[user.verificationLevel]} (
-              {user.verificationLevel})
+              Status: {verificationLabels[verificationLevel]} (
+              {verificationLevel})
             </p>
             <p className="mt-3 text-sm leading-6 text-slate-400">
               Higher verification levels will unlock future governance and agent
