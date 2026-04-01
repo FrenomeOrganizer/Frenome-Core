@@ -38,11 +38,14 @@ export type UserMinAggregateOutputType = {
   id: string | null
   fullName: string | null
   email: string | null
+  emailVerified: Date | null
+  image: string | null
   githubHandle: string | null
   affiliation: string | null
   oflaAgreed: boolean | null
   oflaAgreedAt: Date | null
   tier: $Enums.MembershipTier | null
+  verificationLevel: $Enums.VerificationLevel | null
   votingWeight: number | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -52,11 +55,14 @@ export type UserMaxAggregateOutputType = {
   id: string | null
   fullName: string | null
   email: string | null
+  emailVerified: Date | null
+  image: string | null
   githubHandle: string | null
   affiliation: string | null
   oflaAgreed: boolean | null
   oflaAgreedAt: Date | null
   tier: $Enums.MembershipTier | null
+  verificationLevel: $Enums.VerificationLevel | null
   votingWeight: number | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -66,11 +72,14 @@ export type UserCountAggregateOutputType = {
   id: number
   fullName: number
   email: number
+  emailVerified: number
+  image: number
   githubHandle: number
   affiliation: number
   oflaAgreed: number
   oflaAgreedAt: number
   tier: number
+  verificationLevel: number
   votingWeight: number
   createdAt: number
   updatedAt: number
@@ -90,11 +99,14 @@ export type UserMinAggregateInputType = {
   id?: true
   fullName?: true
   email?: true
+  emailVerified?: true
+  image?: true
   githubHandle?: true
   affiliation?: true
   oflaAgreed?: true
   oflaAgreedAt?: true
   tier?: true
+  verificationLevel?: true
   votingWeight?: true
   createdAt?: true
   updatedAt?: true
@@ -104,11 +116,14 @@ export type UserMaxAggregateInputType = {
   id?: true
   fullName?: true
   email?: true
+  emailVerified?: true
+  image?: true
   githubHandle?: true
   affiliation?: true
   oflaAgreed?: true
   oflaAgreedAt?: true
   tier?: true
+  verificationLevel?: true
   votingWeight?: true
   createdAt?: true
   updatedAt?: true
@@ -118,11 +133,14 @@ export type UserCountAggregateInputType = {
   id?: true
   fullName?: true
   email?: true
+  emailVerified?: true
+  image?: true
   githubHandle?: true
   affiliation?: true
   oflaAgreed?: true
   oflaAgreedAt?: true
   tier?: true
+  verificationLevel?: true
   votingWeight?: true
   createdAt?: true
   updatedAt?: true
@@ -219,11 +237,14 @@ export type UserGroupByOutputType = {
   id: string
   fullName: string
   email: string
+  emailVerified: Date | null
+  image: string | null
   githubHandle: string | null
   affiliation: string | null
   oflaAgreed: boolean
   oflaAgreedAt: Date | null
   tier: $Enums.MembershipTier
+  verificationLevel: $Enums.VerificationLevel
   votingWeight: number
   createdAt: Date
   updatedAt: Date
@@ -256,28 +277,38 @@ export type UserWhereInput = {
   id?: Prisma.UuidFilter<"User"> | string
   fullName?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringFilter<"User"> | string
+  emailVerified?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  image?: Prisma.StringNullableFilter<"User"> | string | null
   githubHandle?: Prisma.StringNullableFilter<"User"> | string | null
   affiliation?: Prisma.StringNullableFilter<"User"> | string | null
   oflaAgreed?: Prisma.BoolFilter<"User"> | boolean
   oflaAgreedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   tier?: Prisma.EnumMembershipTierFilter<"User"> | $Enums.MembershipTier
+  verificationLevel?: Prisma.EnumVerificationLevelFilter<"User"> | $Enums.VerificationLevel
   votingWeight?: Prisma.FloatFilter<"User"> | number
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  accounts?: Prisma.AccountListRelationFilter
+  sessions?: Prisma.SessionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrderInput | Prisma.SortOrder
+  image?: Prisma.SortOrderInput | Prisma.SortOrder
   githubHandle?: Prisma.SortOrderInput | Prisma.SortOrder
   affiliation?: Prisma.SortOrderInput | Prisma.SortOrder
   oflaAgreed?: Prisma.SortOrder
   oflaAgreedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   tier?: Prisma.SortOrder
+  verificationLevel?: Prisma.SortOrder
   votingWeight?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  accounts?: Prisma.AccountOrderByRelationAggregateInput
+  sessions?: Prisma.SessionOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -288,24 +319,32 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   fullName?: Prisma.StringFilter<"User"> | string
+  emailVerified?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  image?: Prisma.StringNullableFilter<"User"> | string | null
   affiliation?: Prisma.StringNullableFilter<"User"> | string | null
   oflaAgreed?: Prisma.BoolFilter<"User"> | boolean
   oflaAgreedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   tier?: Prisma.EnumMembershipTierFilter<"User"> | $Enums.MembershipTier
+  verificationLevel?: Prisma.EnumVerificationLevelFilter<"User"> | $Enums.VerificationLevel
   votingWeight?: Prisma.FloatFilter<"User"> | number
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  accounts?: Prisma.AccountListRelationFilter
+  sessions?: Prisma.SessionListRelationFilter
 }, "id" | "email" | "githubHandle">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrderInput | Prisma.SortOrder
+  image?: Prisma.SortOrderInput | Prisma.SortOrder
   githubHandle?: Prisma.SortOrderInput | Prisma.SortOrder
   affiliation?: Prisma.SortOrderInput | Prisma.SortOrder
   oflaAgreed?: Prisma.SortOrder
   oflaAgreedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   tier?: Prisma.SortOrder
+  verificationLevel?: Prisma.SortOrder
   votingWeight?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -323,11 +362,14 @@ export type UserScalarWhereWithAggregatesInput = {
   id?: Prisma.UuidWithAggregatesFilter<"User"> | string
   fullName?: Prisma.StringWithAggregatesFilter<"User"> | string
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
+  emailVerified?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  image?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   githubHandle?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   affiliation?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   oflaAgreed?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   oflaAgreedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   tier?: Prisma.EnumMembershipTierWithAggregatesFilter<"User"> | $Enums.MembershipTier
+  verificationLevel?: Prisma.EnumVerificationLevelWithAggregatesFilter<"User"> | $Enums.VerificationLevel
   votingWeight?: Prisma.FloatWithAggregatesFilter<"User"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -337,67 +379,90 @@ export type UserCreateInput = {
   id?: string
   fullName: string
   email: string
+  emailVerified?: Date | string | null
+  image?: string | null
   githubHandle?: string | null
   affiliation?: string | null
   oflaAgreed?: boolean
   oflaAgreedAt?: Date | string | null
   tier?: $Enums.MembershipTier
+  verificationLevel?: $Enums.VerificationLevel
   votingWeight?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
   id?: string
   fullName: string
   email: string
+  emailVerified?: Date | string | null
+  image?: string | null
   githubHandle?: string | null
   affiliation?: string | null
   oflaAgreed?: boolean
   oflaAgreedAt?: Date | string | null
   tier?: $Enums.MembershipTier
+  verificationLevel?: $Enums.VerificationLevel
   votingWeight?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   githubHandle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   affiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   oflaAgreed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   oflaAgreedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tier?: Prisma.EnumMembershipTierFieldUpdateOperationsInput | $Enums.MembershipTier
+  verificationLevel?: Prisma.EnumVerificationLevelFieldUpdateOperationsInput | $Enums.VerificationLevel
   votingWeight?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   githubHandle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   affiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   oflaAgreed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   oflaAgreedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tier?: Prisma.EnumMembershipTierFieldUpdateOperationsInput | $Enums.MembershipTier
+  verificationLevel?: Prisma.EnumVerificationLevelFieldUpdateOperationsInput | $Enums.VerificationLevel
   votingWeight?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
   id?: string
   fullName: string
   email: string
+  emailVerified?: Date | string | null
+  image?: string | null
   githubHandle?: string | null
   affiliation?: string | null
   oflaAgreed?: boolean
   oflaAgreedAt?: Date | string | null
   tier?: $Enums.MembershipTier
+  verificationLevel?: $Enums.VerificationLevel
   votingWeight?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -407,11 +472,14 @@ export type UserUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   githubHandle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   affiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   oflaAgreed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   oflaAgreedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tier?: Prisma.EnumMembershipTierFieldUpdateOperationsInput | $Enums.MembershipTier
+  verificationLevel?: Prisma.EnumVerificationLevelFieldUpdateOperationsInput | $Enums.VerificationLevel
   votingWeight?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -421,11 +489,14 @@ export type UserUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   githubHandle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   affiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   oflaAgreed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   oflaAgreedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tier?: Prisma.EnumMembershipTierFieldUpdateOperationsInput | $Enums.MembershipTier
+  verificationLevel?: Prisma.EnumVerificationLevelFieldUpdateOperationsInput | $Enums.VerificationLevel
   votingWeight?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -435,11 +506,14 @@ export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
+  image?: Prisma.SortOrder
   githubHandle?: Prisma.SortOrder
   affiliation?: Prisma.SortOrder
   oflaAgreed?: Prisma.SortOrder
   oflaAgreedAt?: Prisma.SortOrder
   tier?: Prisma.SortOrder
+  verificationLevel?: Prisma.SortOrder
   votingWeight?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -453,11 +527,14 @@ export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
+  image?: Prisma.SortOrder
   githubHandle?: Prisma.SortOrder
   affiliation?: Prisma.SortOrder
   oflaAgreed?: Prisma.SortOrder
   oflaAgreedAt?: Prisma.SortOrder
   tier?: Prisma.SortOrder
+  verificationLevel?: Prisma.SortOrder
   votingWeight?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -467,11 +544,14 @@ export type UserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
+  image?: Prisma.SortOrder
   githubHandle?: Prisma.SortOrder
   affiliation?: Prisma.SortOrder
   oflaAgreed?: Prisma.SortOrder
   oflaAgreedAt?: Prisma.SortOrder
   tier?: Prisma.SortOrder
+  verificationLevel?: Prisma.SortOrder
   votingWeight?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -481,8 +561,17 @@ export type UserSumOrderByAggregateInput = {
   votingWeight?: Prisma.SortOrder
 }
 
+export type UserScalarRelationFilter = {
+  is?: Prisma.UserWhereInput
+  isNot?: Prisma.UserWhereInput
+}
+
 export type StringFieldUpdateOperationsInput = {
   set?: string
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
 }
 
 export type NullableStringFieldUpdateOperationsInput = {
@@ -493,12 +582,12 @@ export type BoolFieldUpdateOperationsInput = {
   set?: boolean
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
 export type EnumMembershipTierFieldUpdateOperationsInput = {
   set?: $Enums.MembershipTier
+}
+
+export type EnumVerificationLevelFieldUpdateOperationsInput = {
+  set?: $Enums.VerificationLevel
 }
 
 export type FloatFieldUpdateOperationsInput = {
@@ -513,31 +602,282 @@ export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
+export type UserCreateNestedOneWithoutAccountsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAccountsInput, Prisma.UserUncheckedCreateWithoutAccountsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAccountsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAccountsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAccountsInput, Prisma.UserUncheckedCreateWithoutAccountsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAccountsInput
+  upsert?: Prisma.UserUpsertWithoutAccountsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAccountsInput, Prisma.UserUpdateWithoutAccountsInput>, Prisma.UserUncheckedUpdateWithoutAccountsInput>
+}
+
+export type UserCreateNestedOneWithoutSessionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSessionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionsInput
+  upsert?: Prisma.UserUpsertWithoutSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSessionsInput, Prisma.UserUpdateWithoutSessionsInput>, Prisma.UserUncheckedUpdateWithoutSessionsInput>
+}
+
+export type UserCreateWithoutAccountsInput = {
+  id?: string
+  fullName: string
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  githubHandle?: string | null
+  affiliation?: string | null
+  oflaAgreed?: boolean
+  oflaAgreedAt?: Date | string | null
+  tier?: $Enums.MembershipTier
+  verificationLevel?: $Enums.VerificationLevel
+  votingWeight?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAccountsInput = {
+  id?: string
+  fullName: string
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  githubHandle?: string | null
+  affiliation?: string | null
+  oflaAgreed?: boolean
+  oflaAgreedAt?: Date | string | null
+  tier?: $Enums.MembershipTier
+  verificationLevel?: $Enums.VerificationLevel
+  votingWeight?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAccountsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAccountsInput, Prisma.UserUncheckedCreateWithoutAccountsInput>
+}
+
+export type UserUpsertWithoutAccountsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAccountsInput, Prisma.UserUncheckedUpdateWithoutAccountsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAccountsInput, Prisma.UserUncheckedCreateWithoutAccountsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAccountsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAccountsInput, Prisma.UserUncheckedUpdateWithoutAccountsInput>
+}
+
+export type UserUpdateWithoutAccountsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubHandle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  affiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  oflaAgreed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  oflaAgreedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tier?: Prisma.EnumMembershipTierFieldUpdateOperationsInput | $Enums.MembershipTier
+  verificationLevel?: Prisma.EnumVerificationLevelFieldUpdateOperationsInput | $Enums.VerificationLevel
+  votingWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAccountsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubHandle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  affiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  oflaAgreed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  oflaAgreedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tier?: Prisma.EnumMembershipTierFieldUpdateOperationsInput | $Enums.MembershipTier
+  verificationLevel?: Prisma.EnumVerificationLevelFieldUpdateOperationsInput | $Enums.VerificationLevel
+  votingWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutSessionsInput = {
+  id?: string
+  fullName: string
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  githubHandle?: string | null
+  affiliation?: string | null
+  oflaAgreed?: boolean
+  oflaAgreedAt?: Date | string | null
+  tier?: $Enums.MembershipTier
+  verificationLevel?: $Enums.VerificationLevel
+  votingWeight?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutSessionsInput = {
+  id?: string
+  fullName: string
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  githubHandle?: string | null
+  affiliation?: string | null
+  oflaAgreed?: boolean
+  oflaAgreedAt?: Date | string | null
+  tier?: $Enums.MembershipTier
+  verificationLevel?: $Enums.VerificationLevel
+  votingWeight?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutSessionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+}
+
+export type UserUpsertWithoutSessionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSessionsInput, Prisma.UserUncheckedUpdateWithoutSessionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSessionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSessionsInput, Prisma.UserUncheckedUpdateWithoutSessionsInput>
+}
+
+export type UserUpdateWithoutSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubHandle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  affiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  oflaAgreed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  oflaAgreedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tier?: Prisma.EnumMembershipTierFieldUpdateOperationsInput | $Enums.MembershipTier
+  verificationLevel?: Prisma.EnumVerificationLevelFieldUpdateOperationsInput | $Enums.VerificationLevel
+  votingWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubHandle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  affiliation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  oflaAgreed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  oflaAgreedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tier?: Prisma.EnumMembershipTierFieldUpdateOperationsInput | $Enums.MembershipTier
+  verificationLevel?: Prisma.EnumVerificationLevelFieldUpdateOperationsInput | $Enums.VerificationLevel
+  votingWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+}
+
+
+/**
+ * Count Type UserCountOutputType
+ */
+
+export type UserCountOutputType = {
+  accounts: number
+  sessions: number
+}
+
+export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  accounts?: boolean | UserCountOutputTypeCountAccountsArgs
+  sessions?: boolean | UserCountOutputTypeCountSessionsArgs
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserCountOutputType
+   */
+  select?: Prisma.UserCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAccountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AccountWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SessionWhereInput
+}
 
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   fullName?: boolean
   email?: boolean
+  emailVerified?: boolean
+  image?: boolean
   githubHandle?: boolean
   affiliation?: boolean
   oflaAgreed?: boolean
   oflaAgreedAt?: boolean
   tier?: boolean
+  verificationLevel?: boolean
   votingWeight?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
+  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
+  _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   fullName?: boolean
   email?: boolean
+  emailVerified?: boolean
+  image?: boolean
   githubHandle?: boolean
   affiliation?: boolean
   oflaAgreed?: boolean
   oflaAgreedAt?: boolean
   tier?: boolean
+  verificationLevel?: boolean
   votingWeight?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -547,11 +887,14 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   id?: boolean
   fullName?: boolean
   email?: boolean
+  emailVerified?: boolean
+  image?: boolean
   githubHandle?: boolean
   affiliation?: boolean
   oflaAgreed?: boolean
   oflaAgreedAt?: boolean
   tier?: boolean
+  verificationLevel?: boolean
   votingWeight?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -561,32 +904,49 @@ export type UserSelectScalar = {
   id?: boolean
   fullName?: boolean
   email?: boolean
+  emailVerified?: boolean
+  image?: boolean
   githubHandle?: boolean
   affiliation?: boolean
   oflaAgreed?: boolean
   oflaAgreedAt?: boolean
   tier?: boolean
+  verificationLevel?: boolean
   votingWeight?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "fullName" | "email" | "githubHandle" | "affiliation" | "oflaAgreed" | "oflaAgreedAt" | "tier" | "votingWeight" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "fullName" | "email" | "emailVerified" | "image" | "githubHandle" | "affiliation" | "oflaAgreed" | "oflaAgreedAt" | "tier" | "verificationLevel" | "votingWeight" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
+  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
+  _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
-  objects: {}
+  objects: {
+    accounts: Prisma.$AccountPayload<ExtArgs>[]
+    sessions: Prisma.$SessionPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     fullName: string
     email: string
+    emailVerified: Date | null
+    image: string | null
     githubHandle: string | null
     affiliation: string | null
     oflaAgreed: boolean
     oflaAgreedAt: Date | null
     tier: $Enums.MembershipTier
+    verificationLevel: $Enums.VerificationLevel
     /**
      * Corporate is capped, Individual scales based on merged GitHub PRs to the Core protocols.
+     * Only users with TIER_1_DIGITAL or higher are factored into the consensus.
      */
     votingWeight: number
     createdAt: Date
@@ -985,6 +1345,8 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  accounts<T extends Prisma.User$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1017,11 +1379,14 @@ export interface UserFieldRefs {
   readonly id: Prisma.FieldRef<"User", 'String'>
   readonly fullName: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
+  readonly emailVerified: Prisma.FieldRef<"User", 'DateTime'>
+  readonly image: Prisma.FieldRef<"User", 'String'>
   readonly githubHandle: Prisma.FieldRef<"User", 'String'>
   readonly affiliation: Prisma.FieldRef<"User", 'String'>
   readonly oflaAgreed: Prisma.FieldRef<"User", 'Boolean'>
   readonly oflaAgreedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly tier: Prisma.FieldRef<"User", 'MembershipTier'>
+  readonly verificationLevel: Prisma.FieldRef<"User", 'VerificationLevel'>
   readonly votingWeight: Prisma.FieldRef<"User", 'Float'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
@@ -1042,6 +1407,10 @@ export type UserFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  /**
    * Filter, which User to fetch.
    */
   where: Prisma.UserWhereUniqueInput
@@ -1060,6 +1429,10 @@ export type UserFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  /**
    * Filter, which User to fetch.
    */
   where: Prisma.UserWhereUniqueInput
@@ -1077,6 +1450,10 @@ export type UserFindFirstArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the User
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
   /**
    * Filter, which User to fetch.
    */
@@ -1126,6 +1503,10 @@ export type UserFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.In
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  /**
    * Filter, which User to fetch.
    */
   where?: Prisma.UserWhereInput
@@ -1173,6 +1554,10 @@ export type UserFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Omit specific fields from the User
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
   /**
    * Filter, which Users to fetch.
    */
@@ -1222,6 +1607,10 @@ export type UserCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  /**
    * The data needed to create a User.
    */
   data: Prisma.XOR<Prisma.UserCreateInput, Prisma.UserUncheckedCreateInput>
@@ -1269,6 +1658,10 @@ export type UserUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    * Omit specific fields from the User
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
   /**
    * The data needed to update a User.
    */
@@ -1336,6 +1729,10 @@ export type UserUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  /**
    * The filter to search for the User to update in case it exists.
    */
   where: Prisma.UserWhereUniqueInput
@@ -1362,6 +1759,10 @@ export type UserDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  /**
    * Filter which User to delete.
    */
   where: Prisma.UserWhereUniqueInput
@@ -1382,6 +1783,54 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
+ * User.accounts
+ */
+export type User$accountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Account
+   */
+  select?: Prisma.AccountSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Account
+   */
+  omit?: Prisma.AccountOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AccountInclude<ExtArgs> | null
+  where?: Prisma.AccountWhereInput
+  orderBy?: Prisma.AccountOrderByWithRelationInput | Prisma.AccountOrderByWithRelationInput[]
+  cursor?: Prisma.AccountWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AccountScalarFieldEnum | Prisma.AccountScalarFieldEnum[]
+}
+
+/**
+ * User.sessions
+ */
+export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Session
+   */
+  select?: Prisma.SessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Session
+   */
+  omit?: Prisma.SessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SessionInclude<ExtArgs> | null
+  where?: Prisma.SessionWhereInput
+  orderBy?: Prisma.SessionOrderByWithRelationInput | Prisma.SessionOrderByWithRelationInput[]
+  cursor?: Prisma.SessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SessionScalarFieldEnum | Prisma.SessionScalarFieldEnum[]
+}
+
+/**
  * User without action
  */
 export type UserDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1393,4 +1842,8 @@ export type UserDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
    * Omit specific fields from the User
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
 }

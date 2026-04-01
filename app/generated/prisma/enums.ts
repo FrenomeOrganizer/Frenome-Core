@@ -16,3 +16,13 @@ export const MembershipTier = {
 } as const
 
 export type MembershipTier = (typeof MembershipTier)[keyof typeof MembershipTier]
+
+
+export const VerificationLevel = {
+  NONE: 'NONE',
+  TIER_1_DIGITAL: 'TIER_1_DIGITAL',
+  TIER_2_STAKE: 'TIER_2_STAKE',
+  TIER_3_KYC: 'TIER_3_KYC'
+} as const
+
+export type VerificationLevel = (typeof VerificationLevel)[keyof typeof VerificationLevel]
