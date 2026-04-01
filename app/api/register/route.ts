@@ -1,4 +1,4 @@
-import { MembershipTier } from "@/app/generated/prisma/enums";
+import { MembershipTier } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 

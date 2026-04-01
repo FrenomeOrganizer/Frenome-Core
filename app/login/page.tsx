@@ -20,9 +20,17 @@ export default function LoginPage() {
       redirect: false,
     });
 
-    if (result?.error) {
+    if (result?.error === "AccessDenied") {
       setError(
         "This email is not authorized for member access yet. Only registered OFLA signers can log in.",
+      );
+      setIsSubmitting(false);
+      return;
+    }
+
+    if (result?.error) {
+      setError(
+        "We couldn't send the magic link just now. Please try again in a moment.",
       );
       setIsSubmitting(false);
       return;
