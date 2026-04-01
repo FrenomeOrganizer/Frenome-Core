@@ -1,9 +1,21 @@
 import { PrismaPg } from "@prisma/adapter-pg";
-import { PrismaClient } from "@prisma/client/default";
+import prismaClientPackage from "@prisma/client";
 import { Pool } from "pg";
 
+const { PrismaClient } = prismaClientPackage as unknown as {
+  PrismaClient: new (options: { adapter: PrismaPg }) => {
+    user: {
+      findUnique: (...args: unknown[]) => Promise<unknown>;
+      findMany: (...args: unknown[]) => Promise<unknown>;
+      create: (...args: unknown[]) => Promise<unknown>;
+    };
+  };
+};
+
+type PrismaClientInstance = InstanceType<typeof PrismaClient>;
+
 const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClient | undefined;
+  prisma: PrismaClientInstance | undefined;
 };
 
 const connectionString = process.env.DATABASE_URL;
