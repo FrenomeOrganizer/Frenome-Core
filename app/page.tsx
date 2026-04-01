@@ -7,6 +7,16 @@ const membershipTierLabels = {
   CORPORATE: "Corporate Member",
 } as const;
 
+type RecentMember = {
+  id: string;
+  fullName: string;
+  email: string;
+  githubHandle: string | null;
+  affiliation: string | null;
+  tier: keyof typeof membershipTierLabels;
+  createdAt: Date;
+};
+
 type HomeProps = {
   searchParams: Promise<{
     registered?: string;
@@ -16,7 +26,7 @@ type HomeProps = {
 
 export default async function Home({ searchParams }: HomeProps) {
   const { registered, registeredField } = await searchParams;
-  const recentMembers = await prisma.user.findMany({
+  const recentMembers: RecentMember[] = await prisma.user.findMany({
     orderBy: {
       createdAt: "desc",
     },
@@ -32,7 +42,7 @@ export default async function Home({ searchParams }: HomeProps) {
     },
   });
 
-  const isRegisteredMatch = (member: (typeof recentMembers)[number]) => {
+  const isRegisteredMatch = (member: RecentMember) => {
     if (!registered) {
       return false;
     }
@@ -122,7 +132,9 @@ export default async function Home({ searchParams }: HomeProps) {
               </div>
 
               {registered &&
-              recentMembers.some((member) => isRegisteredMatch(member)) ? (
+              recentMembers.some((member: RecentMember) =>
+                isRegisteredMatch(member),
+              ) ? (
                 <div className="mt-6 rounded-2xl border border-emerald-300/30 bg-emerald-500/10 px-4 py-4 text-sm text-emerald-100">
                   Registration received. Your newly created member record is now
                   visible below.
@@ -131,7 +143,7 @@ export default async function Home({ searchParams }: HomeProps) {
 
               {recentMembers.length > 0 ? (
                 <ul className="mt-6 space-y-3">
-                  {recentMembers.map((member) => (
+                  {recentMembers.map((member: RecentMember) => (
                     <li
                       key={member.id}
                       className={`rounded-2xl border px-4 py-4 ${
