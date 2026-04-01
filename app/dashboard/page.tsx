@@ -34,7 +34,7 @@ export default async function DashboardPage() {
     redirect("/login");
   }
 
-  const user: DashboardUser | null = await prisma.user.findUnique({
+  const user = (await prisma.user.findUnique({
     where: {
       email: session.user.email.toLowerCase(),
     },
@@ -45,7 +45,7 @@ export default async function DashboardPage() {
       verificationLevel: true,
       tier: true,
     },
-  });
+  })) as DashboardUser | null;
 
   if (!user) {
     redirect("/login");

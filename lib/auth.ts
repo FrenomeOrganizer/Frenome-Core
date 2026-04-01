@@ -3,6 +3,11 @@ import type { NextAuthOptions } from "next-auth";
 import EmailProvider from "next-auth/providers/email";
 import { prisma } from "@/lib/prisma";
 
+type ExistingUser = {
+  id: string;
+  oflaAgreed: boolean;
+};
+
 const emailServer =
   process.env.EMAIL_SERVER ??
   ({
@@ -18,7 +23,7 @@ const emailServer =
   } satisfies Parameters<typeof EmailProvider>[0]["server"]);
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(prisma as Parameters<typeof PrismaAdapter>[0]),
   session: {
     strategy: "database",
   },
@@ -40,7 +45,7 @@ export const authOptions: NextAuthOptions = {
       }
 
       if (email?.verificationRequest) {
-        const existingUser = await prisma.user.findUnique({
+        const existingUser = (await prisma.user.findUnique({
           where: {
             email: normalizedEmail,
           },
@@ -48,7 +53,7 @@ export const authOptions: NextAuthOptions = {
             id: true,
             oflaAgreed: true,
           },
-        });
+        })) as ExistingUser | null;
 
         return existingUser?.oflaAgreed === true;
       }

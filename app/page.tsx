@@ -26,7 +26,7 @@ type HomeProps = {
 
 export default async function Home({ searchParams }: HomeProps) {
   const { registered, registeredField } = await searchParams;
-  const recentMembers: RecentMember[] = await prisma.user.findMany({
+  const recentMembers = (await prisma.user.findMany({
     orderBy: {
       createdAt: "desc",
     },
@@ -40,7 +40,7 @@ export default async function Home({ searchParams }: HomeProps) {
       tier: true,
       createdAt: true,
     },
-  });
+  })) as RecentMember[];
 
   const isRegisteredMatch = (member: RecentMember) => {
     if (!registered) {
