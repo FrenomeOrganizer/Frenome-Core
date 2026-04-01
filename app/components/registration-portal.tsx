@@ -13,6 +13,7 @@ type RegistrationForm = {
   email: string;
   githubHandle: string;
   organization: string;
+  website: string;
   membershipTier: MembershipTier;
   agreedToOfla: boolean;
 };
@@ -22,6 +23,7 @@ const initialForm: RegistrationForm = {
   email: "",
   githubHandle: "",
   organization: "",
+  website: "",
   membershipTier: "Individual Contributor",
   agreedToOfla: false,
 };
@@ -78,6 +80,7 @@ export function RegistrationPortal() {
           email: formData.email,
           githubHandle: formData.githubHandle,
           affiliation: formData.organization,
+          website: formData.website,
           tier: selectedTier?.apiValue ?? "INDIVIDUAL",
           oflaAgreed: formData.agreedToOfla,
         }),
@@ -134,6 +137,24 @@ export function RegistrationPortal() {
             </div>
 
             <form className="mt-6 space-y-5" onSubmit={handleSubmit}>
+              <div className="hidden" aria-hidden="true">
+                <label htmlFor="website">Website</label>
+                <input
+                  id="website"
+                  name="website"
+                  type="text"
+                  value={formData.website}
+                  onChange={(event) =>
+                    setFormData((current) => ({
+                      ...current,
+                      website: event.target.value,
+                    }))
+                  }
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+
               <div>
                 <label
                   className="mb-2 block text-sm font-medium text-slate-700"

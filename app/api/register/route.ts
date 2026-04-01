@@ -7,6 +7,7 @@ type RegisterRequestBody = {
   email?: string;
   githubHandle?: string;
   affiliation?: string;
+  website?: string;
   tier?: keyof typeof MembershipTier;
   oflaAgreed?: boolean;
 };
@@ -20,8 +21,13 @@ export async function POST(request: Request) {
     const githubHandle = body.githubHandle?.trim().replace(/^@/, "") ?? "";
     const normalizedGithubHandle = githubHandle === "" ? null : githubHandle;
     const affiliation = body.affiliation?.trim() ?? "";
+    const website = body.website?.trim() ?? "";
     const tier = body.tier ?? "INDIVIDUAL";
     const oflaAgreed = body.oflaAgreed === true;
+
+    if (website) {
+      return NextResponse.json({ ok: true });
+    }
 
     if (!fullName || !email) {
       return NextResponse.json(
